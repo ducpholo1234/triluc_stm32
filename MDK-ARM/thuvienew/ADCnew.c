@@ -23,7 +23,7 @@ void sosanh ()
 //	 B=AD+40;
 //	 C=AD+50;
 //	 D=AD+60;
-//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
 	if(AD>970)
 	{ 
 		AD=AD;		
@@ -38,7 +38,7 @@ void sosanh ()
 		}
 	 if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2)==1 & HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0|GPIO_PIN_1)==0)
 		{
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_SET); // thay dÚng n‡y
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_SET); // thay d√≤ng n√†y
 		}
 		else 
 		{
