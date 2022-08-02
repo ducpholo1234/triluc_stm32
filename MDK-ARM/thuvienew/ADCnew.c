@@ -34,11 +34,11 @@ void sosanh ()
 		}
 		else 
 		{
-				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+		///		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
 		}
 	 if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2)==1 & HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0|GPIO_PIN_1)==0)
 		{
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_SET); 
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_SET); // thay dòng này
 		}
 		else 
 		{
