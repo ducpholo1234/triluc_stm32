@@ -3,9 +3,10 @@
 #include "adc.h"
 #include "dma.h"
 #include "gpio.h"
+#include "tim.h"
+
 	uint32_t AD;
 	uint16_t check=0;
-//	uint32_t A,B,C,D;
 void hienthi_adc()
 	{
 		HAL_ADC_Start(&hadc1);
@@ -14,52 +15,50 @@ void hienthi_adc()
 	}
 	void XferCpltCallback (DMA_HandleTypeDef *hdma)
 {
-  AD=AD; //we reach this only if DMA transfer was correct
+  AD=AD; 
 }
-
 void sosanh ()
 {
-//	 A=AD+30;
-//	 B=AD+40;
-//	 C=AD+50;
-//	 D=AD+60;
-//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
-	if(AD>970)
+	if(AD>850)
 	{ 
 		AD=AD;		
-		if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0)==1 & HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1|GPIO_PIN_2)==0)
+		if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_2)==0)
 		{
-				check=1;
-		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
+			HAL_ADC_Stop(&hadc1);
 		}
 		else 
 		{
-		///		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5,GPIO_PIN_RESET);
 		}
-	 if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2)==1 & HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0|GPIO_PIN_1)==0)
+	 if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0|GPIO_PIN_1)==0)
 		{
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_SET); // thay dòng này
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET); 
+			HAL_ADC_Stop(&hadc1);
 		}
 		else 
 		{
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5,GPIO_PIN_RESET);
 		}
-	 if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==1 & HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2|GPIO_PIN_0)==0)
+	 if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2|GPIO_PIN_0)==0)
 		{
 			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,GPIO_PIN_SET);
+			HAL_ADC_Stop(&hadc1);
 		}
 		else  
 		{
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5,GPIO_PIN_RESET);
 		}
-
 	}
 	else  
 	{
-		AD=940;
-		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+		Delay_ms(300);
+		hienthi_adc();
+		AD=810;
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5,GPIO_PIN_RESET);
 	}
 }
-void dieukien ()
-{
+void Delay_ms(uint16_t ms){
+	__HAL_TIM_SetCounter(&htim1,0);
+	while(__HAL_TIM_GET_COUNTER(&htim1) < ms);
 }

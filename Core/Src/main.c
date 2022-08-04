@@ -21,9 +21,9 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "tim.h"
 #include "gpio.h"
 #include "ADCnew.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -90,10 +90,11 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_ADC1_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+//HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
-
+HAL_TIM_Base_Start(&htim1);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -104,6 +105,7 @@ int main(void)
 		void XferCpltCallback(DMA_HandleTypeDef *hdma);
 hdma_memtomem_dma2_stream0.XferCpltCallback = &XferCpltCallback;
   HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0, (uint32_t)AD, (uint32_t)AD, 10);
+		
 		hienthi_adc();
 		sosanh();
 //		dieukien();

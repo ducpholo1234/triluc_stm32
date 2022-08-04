@@ -4,6 +4,7 @@
 "buoi2\gpio.o"
 "buoi2\adc.o"
 "buoi2\dma.o"
+"buoi2\tim.o"
 "buoi2\stm32f2xx_it.o"
 "buoi2\stm32f2xx_hal_msp.o"
 "buoi2\stm32f2xx_hal_adc.o"
