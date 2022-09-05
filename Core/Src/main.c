@@ -22,10 +22,13 @@
 #include "adc.h"
 #include "dma.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 #include "ADCnew.h"
+#include "kalman1.h"
+#include "stdio.h"
+/* Includes ------------------------------------------------------------------*/
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
@@ -36,11 +39,18 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+	 uint32_t AC;
+	 uint32_t AD;
+	uint8_t mang[] ="xin chao viet nam";
+	extern float LC;
+	extern int VT;
+	char thu,rong;
+	char nhan[100];
+	int i;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -52,11 +62,26 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/* ********************************loc ADC**************************************************/
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+		if(thu!=13)  nhan[i++]=thu;
+		else if(thu==13)
+		{
+			i=0;
+			HAL_UART_Transmit(&huart1, (uint8_t *)&nhan ,sizeof(nhan),100);
+			for(int j=0;i<sizeof(nhan);j++) 
+			{
+				nhan[j]=rong;
+			}
+		
+		}
+		HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
+}
 
 /* USER CODE END 0 */
 
@@ -67,7 +92,6 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -76,45 +100,44 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_ADC1_Init();
-  MX_TIM1_Init();
+  MX_TIM4_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-//HAL_TIM_Base_Start_IT(&htim1);
+	
+		/* ********************************doc gia tri ADC**************************************************/
+	SimpleKalmanFilter1(2,2,0.001f);
+	HAL_ADC_Start_DMA (&hadc1,(uint32_t*)&AD,1);
+	HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
+	HAL_UART_Transmit(&huart1, mang ,sizeof(mang),100);
   /* USER CODE END 2 */
-HAL_TIM_Base_Start(&htim1);
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		//HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		void XferCpltCallback(DMA_HandleTypeDef *hdma);
-hdma_memtomem_dma2_stream0.XferCpltCallback = &XferCpltCallback;
-  HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0, (uint32_t)AD, (uint32_t)AD, 10);
-		
-		hienthi_adc();
-		sosanh();
-//		dieukien();
-			
-		
+				AC=updateEstimate1(AD);
+				sosanh();
+				bom();
+		}
 	}
-  /* USER CODE END 3 */
-}
 
+  /* USER CODE END 3 */
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -151,6 +174,8 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+
 
 /* USER CODE END 4 */
 

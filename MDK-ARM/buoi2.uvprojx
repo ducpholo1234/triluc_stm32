@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F207xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;           ../Drivers/STM32F2xx_HAL_Driver/Inc;           ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy;           ../Drivers/CMSIS/Device/ST/STM32F2xx/Include;           ../Drivers/CMSIS/Include;           .\thuvienew</IncludePath>
+              <IncludePath>../Core/Inc;       ../Drivers/STM32F2xx_HAL_Driver/Inc;       ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy;       ../Drivers/CMSIS/Device/ST/STM32F2xx/Include;       ../Drivers/CMSIS/Include;       .\kalman-clib-master;       .\kalmannew;       .\thuvienew</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -394,6 +394,21 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
+              <FileName>ADCnew.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thuvienew\ADCnew.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADCnew.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\thuvienew\ADCnew.h</FilePath>
+            </File>
+            <File>
+              <FileName>kalman1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\thuvienew\kalman1.h</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/main.c</FilePath>
@@ -417,6 +432,11 @@
               <FileName>tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f2xx_it.c</FileName>
@@ -513,6 +533,11 @@
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_tim_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f2xx_hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_uart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -522,16 +547,6 @@
               <FileName>system_stm32f2xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/system_stm32f2xx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ADCnew</GroupName>
-          <Files>
-            <File>
-              <FileName>ADCnew.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\thuvienew\ADCnew.c</FilePath>
             </File>
           </Files>
         </Group>

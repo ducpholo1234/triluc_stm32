@@ -31,8 +31,14 @@ buoi2\main.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr.h
 buoi2\main.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr_ex.h
 buoi2\main.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim.h
 buoi2\main.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim_ex.h
+buoi2\main.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_uart.h
 buoi2\main.o: ../Core/Inc/adc.h
 buoi2\main.o: ../Core/Inc/dma.h
 buoi2\main.o: ../Core/Inc/tim.h
+buoi2\main.o: ../Core/Inc/usart.h
 buoi2\main.o: ../Core/Inc/gpio.h
 buoi2\main.o: .\thuvienew\ADCnew.h
+buoi2\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+buoi2\main.o: .\thuvienew\kalman1.h
+buoi2\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+buoi2\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

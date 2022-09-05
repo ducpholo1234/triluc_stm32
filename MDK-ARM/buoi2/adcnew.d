@@ -1,12 +1,6 @@
 buoi2\adcnew.o: thuvienew\ADCnew.c
 buoi2\adcnew.o: thuvienew\ADCnew.h
 buoi2\adcnew.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-buoi2\adcnew.o: ../Core/Inc/dma.h
-buoi2\adcnew.o: ../Core/Inc/main.h
-buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal.h
-buoi2\adcnew.o: ../Core/Inc/stm32f2xx_hal_conf.h
-buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc.h
-buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_def.h
 buoi2\adcnew.o: ../Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
 buoi2\adcnew.o: ../Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f207xx.h
 buoi2\adcnew.o: ../Drivers/CMSIS/Include/core_cm3.h
@@ -16,6 +10,10 @@ buoi2\adcnew.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 buoi2\adcnew.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 buoi2\adcnew.o: ../Drivers/CMSIS/Device/ST/STM32F2xx/Include/system_stm32f2xx.h
 buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal.h
+buoi2\adcnew.o: ../Core/Inc/stm32f2xx_hal_conf.h
+buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc.h
+buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_def.h
+buoi2\adcnew.o: ../Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
 buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
 buoi2\adcnew.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc_ex.h
@@ -33,7 +31,11 @@ buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr.h
 buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr_ex.h
 buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim.h
 buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim_ex.h
+buoi2\adcnew.o: ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_uart.h
 buoi2\adcnew.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 buoi2\adcnew.o: ../Core/Inc/adc.h
+buoi2\adcnew.o: ../Core/Inc/main.h
+buoi2\adcnew.o: ../Core/Inc/dma.h
 buoi2\adcnew.o: ../Core/Inc/gpio.h
 buoi2\adcnew.o: ../Core/Inc/tim.h
+buoi2\adcnew.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
