@@ -16,62 +16,62 @@ uint32_t LUC=0;
 float LC;
 int VT;
 int AD23=0;
-	/* ********************************so sanh dieu kien ADC và xac dinh vi tri dam ***************************************************/
+float dem=0;
+/* ********************************so sanh dieu kien ADC va xac dinh vi tri dam ***************************************************/
 void sosanh ()
 {
-
-	if(AC>828)
+	if(AC>865)
 	{ 
 		if(AD23==0)	
 		{
 			 if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_2)==0)
 					{
 						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);	
-						HAL_TIM_Base_Start_IT(&htim4);
 						VT=4;
-					//	luc();
+						luc();
+						HAL_TIM_Base_Start_IT(&htim4);
 					}
 			
 			else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0|GPIO_PIN_2)==0)
 					{
 						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,GPIO_PIN_SET);						
-						HAL_TIM_Base_Start_IT(&htim4);	
 						VT=3;
-					//	luc();
+						luc();
+						HAL_TIM_Base_Start_IT(&htim4);
 					}
 			else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_0)==0)
 					{
 						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
-					//	luc();
+						luc();
 						VT=5;
 					}
 			else if (HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2)==0 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_0)==1)
 					{
 						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_6,GPIO_PIN_SET);
-						HAL_TIM_Base_Start_IT(&htim4);
-					//	luc();
+						luc();
 						VT=6;
+						HAL_TIM_Base_Start_IT(&htim4);
 						}
-//			else if(	HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_2)==0)
-//			{
-//				if (HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2)==0 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_0)==1)
-//					{
-//						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_6,GPIO_PIN_SET);
-//						HAL_TIM_Base_Start_IT(&htim4);
-//					//	luc();
-//						VT=6;
-//					}
-//				}
-//			else if(	HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0|GPIO_PIN_2)==0)
-//			{
-//				if (HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2)==0 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_0)==1)
-//					{
-//						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_6,GPIO_PIN_SET);
-//						HAL_TIM_Base_Start_IT(&htim4);
-//					//	luc();
-//						VT=6;
-//					}
-//				}
+			else if(	HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_2)==0)
+			{
+				if (HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2)==0 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_0)==1)
+					{
+						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_6,GPIO_PIN_SET);
+						luc();
+						VT=6;
+							HAL_TIM_Base_Start_IT(&htim4);
+					}
+				}
+			else if(	HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1)==1 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_0|GPIO_PIN_2)==0)
+			{
+				if (HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_2)==0 & HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_1|GPIO_PIN_0)==1)
+					{
+						HAL_GPIO_WritePin(GPIOA,GPIO_PIN_6,GPIO_PIN_SET);
+						luc();
+						VT=6;
+							HAL_TIM_Base_Start_IT(&htim4);
+					}
+				}
 			}
 		}
 	else  
@@ -87,7 +87,7 @@ void bom ()
 		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_7,GPIO_PIN_RESET);
 	}
 	
- else if(AC <800)
+ else if(AC <850)
 	{
 			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_7,GPIO_PIN_SET);	
 	}
@@ -96,16 +96,17 @@ void bom ()
 		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_7,GPIO_PIN_RESET);
 	}
 }
-	/* ******************************** tao ngat bang TIMER (0.2s)**************************************************/
+/* ******************************** tao ngat bang TIMER (0.2s)**************************************************/
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance ==TIM4)
 	{
 		AD23++;
-		if(AD23>20)
+		if(AD23==20)
 		{
 			AD23=0;
+		dem=1.0*dem+1;
 		HAL_TIM_Base_Stop_IT (&htim4);
 		}
 	}

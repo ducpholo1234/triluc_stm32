@@ -26,9 +26,8 @@
 #include "gpio.h"
 #include "ADCnew.h"
 #include "kalman1.h"
-#include "stdio.h"
-/* Includes ------------------------------------------------------------------*/
 /* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
@@ -41,7 +40,7 @@
 /* USER CODE BEGIN PD */
 	 uint32_t AC;
 	 uint32_t AD;
-	uint8_t mang[] ="xin chao viet nam";
+	uint8_t  mang[1000] ="xin chao viet nam";
 	extern float LC;
 	extern int VT;
 	char thu,rong;
@@ -73,14 +72,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		else if(thu==13)
 		{
 			i=0;
-			HAL_UART_Transmit(&huart1, (uint8_t *)&nhan ,sizeof(nhan),100);
-			for(int j=0;i<sizeof(nhan);j++) 
+			HAL_UART_Transmit(&huart1, (uint8_t *)&nhan ,strlen(nhan),1000);
+			for(int j=0; j< sizeof(nhan) ; j++) 
 			{
 				nhan[j]=rong;
 			}
-		
 		}
-		HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
+	HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
 }
 
 /* USER CODE END 0 */
@@ -118,7 +116,7 @@ int main(void)
 	
 		/* ********************************doc gia tri ADC**************************************************/
 	SimpleKalmanFilter1(2,2,0.001f);
-	HAL_ADC_Start_DMA (&hadc1,(uint32_t*)&AD,1);
+	HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&AD,1);
 	HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
 	HAL_UART_Transmit(&huart1, mang ,sizeof(mang),100);
   /* USER CODE END 2 */
@@ -131,13 +129,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  	HAL_UART_Transmit(&huart1, mang ,sizeof(mang),100);
+	  HAL_Delay(1000);
 				AC=updateEstimate1(AD);
 				sosanh();
-				bom();
+				//bom();
 		}
 	}
 
   /* USER CODE END 3 */
+
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -150,10 +151,14 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLN = 216;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV6;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -162,12 +167,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }

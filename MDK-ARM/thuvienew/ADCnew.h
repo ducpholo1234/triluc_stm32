@@ -6,5 +6,4 @@
 	void bom ();
 	void sosanh();
 	void luc();
-	//void dieukien();
 #endif 
