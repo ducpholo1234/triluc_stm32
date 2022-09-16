@@ -39,3 +39,5 @@ buoi2\adcnew.o: ../Core/Inc/dma.h
 buoi2\adcnew.o: ../Core/Inc/gpio.h
 buoi2\adcnew.o: ../Core/Inc/tim.h
 buoi2\adcnew.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+buoi2\adcnew.o: ../Core/Inc/usart.h
+buoi2\adcnew.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

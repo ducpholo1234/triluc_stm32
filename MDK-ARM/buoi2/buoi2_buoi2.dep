@@ -1,8 +1,8 @@
 Dependencies for Project 'buoi2', Target 'buoi2': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32f207xx.s)(0x631B05CD)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_buoi2-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F2xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include--pd "__UVISION_VERSION SETA 533" --pd "_RTE_ SETA 1" --pd "STM32F207xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f207xx.lst --xref -o buoi2\startup_stm32f207xx.o --depend buoi2\startup_stm32f207xx.d)
-F (.\thuvienew\ADCnew.c)(0x631B0543)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I ../Drivers/CMSIS/Include -I .\kalman-clib-master -I .\kalmannew -I .\thuvienew-I.\RTE\_buoi2-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F2xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32F207xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F207xx-o buoi2\adcnew.o --omf_browse buoi2\adcnew.crf --depend buoi2\adcnew.d)
-I (thuvienew\ADCnew.h)(0x631AA9BC)
+F (.\thuvienew\ADCnew.c)(0x63243F89)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I ../Drivers/CMSIS/Include -I .\kalman-clib-master -I .\kalmannew -I .\thuvienew-I.\RTE\_buoi2-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F2xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32F207xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F207xx-o buoi2\adcnew.o --omf_browse buoi2\adcnew.crf --depend buoi2\adcnew.d)
+I (thuvienew\ADCnew.h)(0x63243D70)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (../Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h)(0x62DDF9F7)
 I (../Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f207xx.h)(0x62DDF9F7)
@@ -41,9 +41,11 @@ I (../Core/Inc/dma.h)(0x631B05CA)
 I (../Core/Inc/gpio.h)(0x631B05CA)
 I (../Core/Inc/tim.h)(0x631B05CA)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E8E3CC2)
-F (.\thuvienew\ADCnew.h)(0x631AA9BC)()
+I (../Core/Inc/usart.h)(0x631B05CA)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
+F (.\thuvienew\ADCnew.h)(0x63243D70)()
 F (.\thuvienew\kalman1.h)(0x630C632C)()
-F (../Core/Src/main.c)(0x631B07D4)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I ../Drivers/CMSIS/Include -I .\kalman-clib-master -I .\kalmannew -I .\thuvienew-I.\RTE\_buoi2-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F2xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32F207xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F207xx-o buoi2\main.o --omf_browse buoi2\main.crf --depend buoi2\main.d)
+F (../Core/Src/main.c)(0x6323EBF7)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I ../Drivers/CMSIS/Include -I .\kalman-clib-master -I .\kalmannew -I .\thuvienew-I.\RTE\_buoi2-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F2xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32F207xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F207xx-o buoi2\main.o --omf_browse buoi2\main.crf --depend buoi2\main.d)
 I (../Core/Inc/main.h)(0x631B05CB)
 I (../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal.h)(0x62DDF9F7)
 I (../Core/Inc/stm32f2xx_hal_conf.h)(0x631B05CB)
@@ -81,7 +83,7 @@ I (../Core/Inc/dma.h)(0x631B05CA)
 I (../Core/Inc/tim.h)(0x631B05CA)
 I (../Core/Inc/usart.h)(0x631B05CA)
 I (../Core/Inc/gpio.h)(0x631B05CA)
-I (.\thuvienew\ADCnew.h)(0x631AA9BC)
+I (.\thuvienew\ADCnew.h)(0x63243D70)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (.\thuvienew\kalman1.h)(0x630C632C)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
@@ -222,7 +224,7 @@ I (../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr_ex.h)(0x62DDF9F7)
 I (../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim.h)(0x62DDF9F7)
 I (../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim_ex.h)(0x62DDF9F7)
 I (../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_uart.h)(0x62DDF9F7)
-F (../Core/Src/usart.c)(0x631B05CA)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I ../Drivers/CMSIS/Include -I .\kalman-clib-master -I .\kalmannew -I .\thuvienew-I.\RTE\_buoi2-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F2xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32F207xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F207xx-o buoi2\usart.o --omf_browse buoi2\usart.crf --depend buoi2\usart.d)
+F (../Core/Src/usart.c)(0x6320375C)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc -I ../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I ../Drivers/CMSIS/Include -I .\kalman-clib-master -I .\kalmannew -I .\thuvienew-I.\RTE\_buoi2-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F2xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include-D__UVISION_VERSION="533" -D_RTE_ -DSTM32F207xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F207xx-o buoi2\usart.o --omf_browse buoi2\usart.crf --depend buoi2\usart.d)
 I (../Core/Inc/usart.h)(0x631B05CA)
 I (../Core/Inc/main.h)(0x631B05CB)
 I (../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal.h)(0x62DDF9F7)

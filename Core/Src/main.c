@@ -38,12 +38,12 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-	 uint32_t AC;
+	 uint32_t ADC_value;
 	 uint32_t AD;
-	uint8_t  mang[1000] ="xin chao viet nam";
-	extern float LC;
+	uint8_t mang[] ="xin chao Viet nam";
+	extern float power;
 	extern int VT;
-	char thu,rong;
+	char thu,null;
 	char nhan[100];
 	int i;
 /* USER CODE END PD */
@@ -65,21 +65,28 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
 /* ********************************loc ADC**************************************************/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-		if(thu!=13)  nhan[i++]=thu;
-		else if(thu==13)
+		UNUSED(huart);
+		if(huart -> Instance == USART1)
+		{
+		if(thu!=20)  nhan[i++]=thu;
+		else if(thu==20)
 		{
 			i=0;
-			HAL_UART_Transmit(&huart1, (uint8_t *)&nhan ,strlen(nhan),1000);
+			HAL_UART_Transmit(&huart1, (uint8_t *)&nhan ,sizeof(nhan),100);
 			for(int j=0; j< sizeof(nhan) ; j++) 
 			{
-				nhan[j]=rong;
+				nhan[j]=null;
 			}
 		}
+	}
 	HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
 }
+
+//-----------dataSend-v1--------------------//
 
 /* USER CODE END 0 */
 
@@ -95,7 +102,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+			HAL_Init();
 
   /* USER CODE BEGIN Init */
   /* USER CODE END Init */
@@ -118,7 +125,7 @@ int main(void)
 	SimpleKalmanFilter1(2,2,0.001f);
 	HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&AD,1);
 	HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
-	HAL_UART_Transmit(&huart1, mang ,sizeof(mang),100);
+	//HAL_UART_Transmit(&huart1,(uint8_t*) mang ,sizeof(mang),10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -129,11 +136,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  	HAL_UART_Transmit(&huart1, mang ,sizeof(mang),100);
-	  HAL_Delay(1000);
-				AC=updateEstimate1(AD);
-				sosanh();
-				//bom();
+	  //	HAL_UART_Transmit(&huart1, mang ,sizeof(mang),100);
+	 // HAL_Delay(1000);
+	 		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
+				ADC_value=updateEstimate1(AD);
+				compare();
+				pump();
 		}
 	}
 
