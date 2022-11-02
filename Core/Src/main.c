@@ -16,6 +16,9 @@
   *
   ******************************************************************************
   */
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -26,8 +29,16 @@
 #include "gpio.h"
 #include "ADCnew.h"
 #include "kalman1.h"
+#include "stdio.h"
+#include "string.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+/* USER CODE END Header */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+
+/* Private includes ----------------------------------------------------------*/
+
 
 /* USER CODE END Includes */
 
@@ -40,12 +51,29 @@
 /* USER CODE BEGIN PD */
 	 uint32_t ADC_value;
 	 uint32_t AD;
-	uint8_t mang[] ="xin chao Viet nam";
 	extern float power;
+	extern int count;
 	extern int VT;
-	char thu,null;
-	char nhan[100];
-	int i;
+	char null;
+	volatile uint8_t nhan[12];
+	volatile uint8_t thu;
+	char mang[]="hello ESP";
+	uint8_t i=0;
+	extern int create_delay;
+ 	int	interrupt_uart=0;
+	int regime=0;
+	uint8_t rv_uart[10][20];
+	uint8_t rv_num =0;
+	char *pch;
+	
+//	void test_pump();
+//	void data_esp ();
+//	void test_led();
+//	void pump ();
+//	void compare();
+//	void energy();
+//	void evenPunch ();
+//	void uart_handle();
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,7 +83,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,27 +93,50 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-/* ********************************loc ADC**************************************************/
+/* ********************************ngat UART**************************************************/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-		UNUSED(huart);
-		if(huart -> Instance == USART1)
+	UNUSED(huart);
+	if(huart -> Instance == USART1)
+	{
+		if(thu!=10) 
 		{
-		if(thu!=20)  nhan[i++]=thu;
-		else if(thu==20)
+			nhan[i++]=thu;
+		}
+		else if(thu==10)
 		{
+			nhan[i++]='\0';
+			HAL_UART_Transmit(&huart1, (uint8_t *)&nhan ,sizeof(nhan),10);
+			interrupt_uart=1;	
 			i=0;
-			HAL_UART_Transmit(&huart1, (uint8_t *)&nhan ,sizeof(nhan),100);
-			for(int j=0; j< sizeof(nhan) ; j++) 
-			{
-				nhan[j]=null;
-			}
+			//for(int cnt=0;cnt<sizeof(nhan);cnt++) nhan[cnt]=null;
 		}
 	}
-	HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
+	HAL_UART_Receive_IT(&huart1,(uint8_t*)&thu,1);
+}
+void uart_handle(){
+	if(interrupt_uart == 1){
+		pch = strtok((char *)nhan," ");
+		while(pch != NULL){
+			strcpy((char *) rv_uart[rv_num++],pch);
+			pch = strtok(NULL," ");
+		}
+		interrupt_uart=0;
+		if(strcmp((char *)rv_uart[1],"1")==0)
+		{
+			regime =1;
+		}
+		else if(strcmp((char *)rv_uart[1],"2")==0)
+		{
+			regime =2;
+		}
+		else if(strcmp((char *)rv_uart[1],"3")==0)
+		{
+			regime =3;
+		}
+	}
 }
 
-//-----------dataSend-v1--------------------//
 
 /* USER CODE END 0 */
 
@@ -102,14 +152,13 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-			HAL_Init();
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
-
   /* USER CODE BEGIN SysInit */
   /* USER CODE END SysInit */
 
@@ -119,37 +168,44 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM4_Init();
   MX_USART1_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 	
 		/* ********************************doc gia tri ADC**************************************************/
 	SimpleKalmanFilter1(2,2,0.001f);
 	HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&AD,1);
+	HAL_UART_Transmit(&huart1,(uint8_t*) mang ,sizeof(mang),10);
 	HAL_UART_Receive_IT (&huart1,(uint8_t*)&thu,1);
-	//HAL_UART_Transmit(&huart1,(uint8_t*) mang ,sizeof(mang),10);
+	HAL_TIM_Base_Start(&htim3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		//HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //	HAL_UART_Transmit(&huart1, mang ,sizeof(mang),100);
-	 // HAL_Delay(1000);
-	 		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
-				ADC_value=updateEstimate1(AD);
-				compare();
-				pump();
+			uart_handle();
+			ADC_value=updateEstimate1(AD);
+			data_esp();
+			//pump();
+		switch(regime)
+		{
+				case 1: 
+							compare();
+				break;
+				case 2: test_led();
+				break;
+				case 3:	test_pump();
+				break;
 		}
 	}
-
+}
   /* USER CODE END 3 */
-
 /**
   * @brief System Clock Configuration
-  * @retval None
+  * @retval None	
   */
 void SystemClock_Config(void)
 {
